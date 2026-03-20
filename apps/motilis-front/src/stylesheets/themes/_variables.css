@@ -1,0 +1,11 @@
+/**  CSS Variables **/
+:root {
+  --primary-color: oklch(0.1681 0.0019 286.19);
+  --secondary-color: oklch(0.2228 0.0043 286.04);
+
+  --text-color: oklch(1 0 0);
+
+  --correct-color: oklch(0.6494 0.1739 143.75);
+  --absent-color: oklch(0.3473 0.004 286.19);
+  --partial-color: oklch(0.7181 0.1379 75.8);
+}

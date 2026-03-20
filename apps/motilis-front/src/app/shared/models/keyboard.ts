@@ -1,0 +1,7 @@
+export const KEY_TYPE = {
+  LETTER: 'LETTER',
+  ENTER: 'ENTER',
+  BACKSPACE: 'BACKSPACE',
+  DELETE: 'DELETE',
+  ESCAPE: 'ESCAPE',
+};

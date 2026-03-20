@@ -1,0 +1,20 @@
+@keyframes pop-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flip-data {
+  0% {
+    transform: rotateX(180deg);
+  }
+
+  100% {
+    transform: rotateX(0deg);
+  }
+}

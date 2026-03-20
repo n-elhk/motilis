@@ -1,0 +1,116 @@
+#game {
+  --letter-size: 50px;
+  --key-size: 40px;
+  --key-font-size: 1.2em;
+  --__lettter-bg-color: transparent;
+  --__lettter--border-color: oklch(30.52% 0.000 0);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 10px;
+
+  @media screen and (max-width: 576px) {
+    --letter-size: 40px;
+    --key-size: 30px;
+    --key-font-size: 0.8em;
+  }
+}
+
+.board-wrapper {
+  display: grid;
+  margin-top: 15px;
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(var(--col-grid), var(--letter-size));
+  grid-template-rows: repeat(6, var(--letter-size));
+}
+
+.board-wrapper .attempt {
+  display: contents;
+  text-transform: uppercase;
+}
+
+.letter-wrapper {
+  border: 3px solid #2f2f2f;
+  background-color: transparent;
+
+  corner-shape: squircle;
+  border-radius: 12px;
+  border-color: var(--__lettter--border-color);
+  background-color: var(--__lettter-bg-color);
+
+  &.current-box {
+    --__lettter--border-color: #73adff;
+  }
+
+  .letter {
+    width: 100%;
+    height: 100%;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: calc(1em + 1vw);
+    position: relative;
+  }
+}
+
+.keyboard-wrapper {
+  display: grid;
+  grid-template-columns: repeat(10, var(--key-size));
+  grid-template-rows: repeat(3, 45px);
+  grid-column-gap: 0.5rem;
+  grid-row-gap: 0.8rem;
+  place-content: center;
+  width: 100%;
+
+  .keyboard-line {
+    display: contents;
+
+    .key {
+      --__lettter--border-color: white;
+      cursor: pointer;
+      font-size: var(--key-font-size);
+      font-weight: 700;
+      color: var(--text-color);
+      corner-shape: squircle;
+      border-radius: 8px;
+      border-color: var(--__lettter--border-color);
+      background-color: var(--__lettter-bg-color);
+
+      &.big {
+        grid-column: var(--col-key) / span 2;
+      }
+
+      svg-icon {
+        font-size: 1.1em;
+      }
+    }
+  }
+}
+
+.letter-wrapper.has-letter {
+  animation: flip-data 0.4s ease both;
+  animation-delay: calc(sibling-index() * 100ms);
+}
+
+.correct {
+  --__lettter--border-color: var(--correct-color);
+  --__lettter-bg-color: var(--correct-color);
+}
+
+.absent {
+  --__lettter--border-color: var(--absent-color);
+  --__lettter-bg-color: var(--absent-color);
+
+  &:is(button) {
+    opacity: 0.6;
+  }
+}
+
+.partial {
+  --__lettter--border-color: var(--partial-color);
+  --__lettter-bg-color: var(--partial-color);
+}

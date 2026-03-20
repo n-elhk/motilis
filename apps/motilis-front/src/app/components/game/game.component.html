@@ -1,0 +1,79 @@
+<div id="game">
+  @let solutionValue = solution();
+  <div class="board-wrapper" [style.--col-grid]="solutionValue.length">
+    @let lines = evaluations();
+    @for (ev of lines; let rowIndex = $index; track rowIndex) {
+      <div class="attempt">
+        @for (item of ev; let colIndex = $index; track colIndex) {
+          @let letter = displayLetter(currentBoard(), rowIndex, colIndex);
+          @let isCurrentRow = rowIndex === boardRowIndex();
+
+          <div
+            class="letter-wrapper"
+            [class]="`${lines[rowIndex][colIndex]}`"
+            [class.current-box]="
+              boardColIndex() + 1 === colIndex && isCurrentRow
+            "
+            [class.has-letter]="!!(letter && rowIndex < boardRowIndex())"
+          >
+            <div class="letter">{{ letter }}</div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="keyboard-wrapper">
+    <div class="keyboard-line">
+      <button wdKeyboard type="button" value="a" class="key">A</button>
+      <button wdKeyboard type="button" value="z" class="key">Z</button>
+      <button wdKeyboard type="button" value="e" class="key">E</button>
+      <button wdKeyboard type="button" value="r" class="key">R</button>
+      <button wdKeyboard type="button" value="t" class="key">T</button>
+      <button wdKeyboard type="button" value="y" class="key">Y</button>
+      <button wdKeyboard type="button" value="u" class="key">U</button>
+      <button wdKeyboard type="button" value="i" class="key">I</button>
+      <button wdKeyboard type="button" value="o" class="key">O</button>
+      <button wdKeyboard type="button" value="p" class="key">P</button>
+    </div>
+    <div class="keyboard-line">
+      <button wdKeyboard type="button" value="q" class="key">Q</button>
+      <button wdKeyboard type="button" value="s" class="key">S</button>
+      <button wdKeyboard type="button" value="d" class="key">D</button>
+      <button wdKeyboard type="button" value="f" class="key">F</button>
+      <button wdKeyboard type="button" value="g" class="key">G</button>
+      <button wdKeyboard type="button" value="h" class="key">H</button>
+      <button wdKeyboard type="button" value="j" class="key">J</button>
+      <button wdKeyboard type="button" value="k" class="key">K</button>
+      <button wdKeyboard type="button" value="l" class="key">L</button>
+      <button wdKeyboard type="button" value="m" class="key">M</button>
+    </div>
+
+    <div class="keyboard-line">
+      <button
+        [style.--col-key]="1"
+        wdKeyboard
+        type="button"
+        value="enter"
+        class="key big"
+      >
+        <svg-icon aria-hidden="true" svgName="keyboard_return" />
+      </button>
+      <button wdKeyboard type="button" value="w" class="key">W</button>
+      <button wdKeyboard type="button" value="x" class="key">X</button>
+      <button wdKeyboard type="button" value="c" class="key">C</button>
+      <button wdKeyboard type="button" value="v" class="key">V</button>
+      <button wdKeyboard type="button" value="b" class="key">B</button>
+      <button wdKeyboard type="button" value="n" class="key">N</button>
+      <button
+        [style.--col-key]="9"
+        wdKeyboard
+        type="button"
+        value="delete"
+        class="key big"
+      >
+        <svg-icon aria-hidden="true" svgName="backspace" />
+      </button>
+    </div>
+  </div>
+</div>

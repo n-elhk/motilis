@@ -1,0 +1,37 @@
+.header--wrapper {
+  display: grid;
+  grid-template-columns: 1fr minmax(200px, auto) 1fr;
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+  padding: 0.5rem;
+  font-weight: 500;
+  font-size: 1.2em;
+}
+
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.date-title-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  svg-icon {
+    cursor: pointer;
+  }
+}
+
+.navivations--wrapper {
+  svg-icon {
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+}
+
+.navivations--start {
+  text-align: end;
+}

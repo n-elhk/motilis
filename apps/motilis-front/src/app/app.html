@@ -1,0 +1,47 @@
+<div class="header--wrapper">
+  <div class="navivations--wrapper navivations--start">
+    <svg-icon aria-hidden="true" svgName="shuffle" (click)="loadWordLocaly()" />
+    <svg-icon
+      aria-hidden="true"
+      svgName="calendar"
+      (click)="loadWordWithDate()"
+    />
+  </div>
+
+  <div class="title-wrapper">
+    @if (canShowDate()) {
+    <div class="date-title-content">
+      <svg-icon
+        aria-hidden="true"
+        svgName="chevron_left"
+        (click)="decreaseDate()"
+      />
+      <div>{{ convertedDate() }}</div>
+      <svg-icon
+        aria-hidden="true"
+        svgName="chevron_right"
+        (click)="increaseDate()"
+      />
+    </div>
+    } @else {
+    <span>Motilis</span>
+    }
+  </div>
+
+  <div class="navivations--wrapper navivations--end">
+    <svg-icon
+      aria-hidden="true"
+      svgName="bar_chart"
+      (click)="openStatDialog()"
+    />
+    <svg-icon aria-hidden="true" svgName="help" (click)="openHelpDialog()" />
+  </div>
+</div>
+
+<div class="page-wrapper">
+  @if (status() === LOADED) {
+  <app-game />
+  } @else if (status() === 'loading') {
+  <div>Chargement</div>
+  }
+</div>

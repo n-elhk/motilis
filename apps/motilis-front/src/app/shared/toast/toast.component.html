@@ -1,0 +1,10 @@
+@if (visible()) {
+  <div
+    class="toast"
+    animate.enter="toast-enter"
+    animate.leave="toast-leave"
+    (animationend)="onAnimationEnd($event)"
+  >
+    <div>{{ data.text }}</div>
+  </div>
+}

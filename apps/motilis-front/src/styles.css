@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/cdk/overlay-prebuilt.css';
+@import './stylesheets/themes/_variables.css';
+@import './stylesheets/themes/_typography.css';
+@import './stylesheets/elements/button.css';
+@import './stylesheets/elements/popup.css';
+@import './stylesheets/elements/animation.css';
+
+html,
+body {
+  height: 100%;
+  font-family: 'Nunito Black';
+}
+
+body {
+  margin: 0;
+  background: var(--primary-color);
+
+  /** Disable text slection. */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.page-container {
+  width: 100%;
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .page-container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .page-container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .page-container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-container {
+    max-width: 1140px;
+  }
+}
