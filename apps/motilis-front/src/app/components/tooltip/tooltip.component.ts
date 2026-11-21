@@ -1,7 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `<div animate.enter="fade-in" animate.leave="fade-out">{{ text }}</div>`,
   styles: [`
     :host { color: var(--text-color); }

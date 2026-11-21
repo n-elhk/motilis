@@ -1,7 +1,3 @@
-.dialog-title {
-  margin-top: 0;
-}
-
 .help-exemple .help-word {
   display: grid;
   grid-template-columns: repeat(5, minmax(20px, 36px));
@@ -17,7 +13,7 @@
   align-items: center;
   justify-content: center;
 
-  border: 3px solid hsl(0deg 0% 18%);
+  border: 3px solid var(--empty-border-color);
   background-color: transparent;
   border-radius: 6px;
   box-sizing: border-box;
@@ -25,11 +21,13 @@
   &.correct {
     background-color: var(--correct-color);
     border-color: var(--correct-color);
+    color: var(--on-state-color);
   }
 
   &.partial {
     background-color: var(--partial-color);
     border-color: var(--partial-color);
+    color: var(--on-state-color);
   }
 
   &.absent {
@@ -50,16 +48,12 @@
   }
 
   &.absent {
-    color: var(--absent-color);
+    color: var(--absent-text-color);
   }
 }
 
 .help-text {
   font-size: 0.8rem;
-  color: #8e8e90;
+  color: var(--muted-text-color);
   margin-block: 0.5rem;
-}
-
-a {
-  color: currentColor;
 }

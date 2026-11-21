@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
-import { CHRISTIAN_WORDS } from '../../dictionary/dictionary';
+import { Service } from '@angular/core';
+import { CHRISTIAN_WORDS } from '../../dictionary/christian-words';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class MockApiService {
   private getRandomNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;

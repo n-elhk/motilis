@@ -6,18 +6,27 @@ import {
   GameStatusType,
 } from '../models';
 
+/** Équivalent parlé de chaque couleur de case. */
+export const STATE_LABELS: Record<AttempType, string> = {
+  correct: 'bien placée',
+  partial: 'mal placée',
+  absent: 'absente',
+};
+
+/** Phrase lue aux lecteurs d'écran : la couleur de chaque lettre du mot joué. */
+export const describeRow = (word: string, evaluation: AttempType[]) => {
+  const details = Array.from(word)
+    .map((letter, i) => `${letter.toUpperCase()} ${STATE_LABELS[evaluation[i]] ?? ''}`)
+    .join(', ');
+  return `${word.toUpperCase()} : ${details}`;
+};
+
 export const descryptSolution = (solution: string) => {
   return window.atob(solution);
 };
 
-export const isDateSuperiorThanToday = (date: Date) => {
-  const today = new Date();
-  return (
-    date.getDay() > today.getDate() ||
-    date.getMonth() + 1 > today.getMonth() + 1 ||
-    date.getFullYear() > today.getFullYear()
-  );
-};
+export const isTodayOrLater = (date: Temporal.PlainDate) =>
+  Temporal.PlainDate.compare(date, Temporal.Now.plainDateISO()) >= 0;
 
 export const getEvaluations = (solution: string, evaluations: Evaluations) => {
   if (evaluations.length === 0) {

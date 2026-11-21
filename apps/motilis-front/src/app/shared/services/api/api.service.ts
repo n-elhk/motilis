@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { map, Observable, retry } from 'rxjs';
 import { StorageKey } from '../../models/storage';
 import { StorageService } from '../storage/storage.service';
@@ -10,14 +10,7 @@ export const padStart = (num: number, char: string, places = 2) => {
   return String(num).padStart(places, char);
 };
 
-export const convertDate = (date: Date | string | number) => {
-  const toConvert = new Date(date);
-  return `${toConvert.getFullYear()}-${padStart(toConvert.getMonth() + 1, '0')}-${padStart(toConvert.getDate(), '0')}`;
-};
-
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class ApiService {
   private readonly storageService = inject(StorageService);
   private readonly httpClient = inject(HttpClient);
@@ -26,7 +19,7 @@ export class ApiService {
    * @description Server is down, play localy
    * @returns Motilis object
    */
-  public getMotilis(date?: Date) {
+  public getMotilis(date?: Temporal.PlainDate) {
     const params = this.getDateParams(date);
     return this.httpClient.get<Motilis>('/api/word', { params });
   }
@@ -53,15 +46,12 @@ export class ApiService {
    * @description Server is down, play localy
    * @returns Motilis object
    */
-  public getMotilisWithDate(date: Date): Observable<string> {
+  public getMotilisWithDate(date: Temporal.PlainDate): Observable<string> {
     return this.getMotilis(date).pipe(map(({ solution }) => solution));
   }
 
-  getDateParams(date: Date | undefined) {
-    if (date) {
-      return new HttpParams().set('date', convertDate(date));
-    }
-    return new HttpParams().set('date', convertDate(new Date()));
+  getDateParams(date: Temporal.PlainDate = Temporal.Now.plainDateISO()) {
+    return new HttpParams().set('date', date.toString());
   }
 
   openEventSource<T>(url: string): Observable<T> {

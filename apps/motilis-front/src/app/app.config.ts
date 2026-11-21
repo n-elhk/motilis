@@ -8,8 +8,8 @@ import {
 import {
   provideClientHydration,
   withEventReplay,
+  withNoIncrementalHydration,
 } from '@angular/platform-browser';
-
 
 import { DomSanitizer } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
@@ -48,7 +48,7 @@ export function initializeIcon(
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(withEventReplay(), withNoIncrementalHydration()),
     provideBrowserGlobalErrorListeners(),
 
     provideHttpClient(withFetch()),

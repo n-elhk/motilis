@@ -1,7 +1,7 @@
 
 import {
   ErrorHandler,
-  Injectable,
+  Service,
   SecurityContext,
   inject,
   DOCUMENT
@@ -36,9 +36,7 @@ class SvgIconConfig {
   ) {}
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class IconRegistery {
   private _httpClient = inject(HttpClient);
 

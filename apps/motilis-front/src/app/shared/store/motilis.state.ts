@@ -1,17 +1,14 @@
-import { StateSignals, WritableStateSource } from "@ngrx/signals";
 import { Board, GameplayType } from "../models";
 
 export type BoardState = {
   boardState: Board;
   solution: string;
   remainingTime: number;
-  selectedDate: Date;
+  selectedDate: Temporal.PlainDate;
   gameplay: GameplayType;
   status: RequestStatusType;
   error: string;
 };
-
-export type MotilisStoreType = WritableStateSource<BoardState> & StateSignals<BoardState>
 
 export const RequestStatus = {
   INITIAL: 'initial',

@@ -1,20 +1,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2025",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": ["es2025", "esnext.temporal", "dom"],
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
+    "skipDefaultLibCheck": true
   },
   "exclude": ["node_modules", "tmp"]
 }

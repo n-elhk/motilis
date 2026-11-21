@@ -1,6 +1,2 @@
-export type Motilis = {
-  solution: string;
-  link: string;
-  remainingTime: number;
-  dates: number[];
-}
+/** Contrat partagé avec le back (cf. `libs/motilis-models`). */
+export type { WordOfTheDay as Motilis } from '@motilis/models';

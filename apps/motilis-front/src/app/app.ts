@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewContainerRef,
   afterNextRender,
@@ -9,22 +8,18 @@ import { SvgIcon, HelpComponent } from './components';
 import { GameComponent } from './components/game/game.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { Gameplay } from './shared/models';
-import { StorageService } from './shared/services/storage/storage.service';
 import { MotilisStore, RequestStatus } from './shared/store';
-import { openStatDialogFn } from './shared/store/motilis.methods';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SvgIcon, GameComponent],
 })
 export class App {
   private readonly dialog = inject(Dialog);
   private readonly vcr = inject(ViewContainerRef);
   private readonly motilisStore = inject(MotilisStore);
-  private readonly storageService = inject(StorageService);
 
   readonly convertedDate = this.motilisStore.convertedDate;
 
@@ -41,7 +36,7 @@ export class App {
   }
 
   openStatDialog(): void {
-    openStatDialogFn(this.dialog, this.storageService);
+    this.motilisStore.openStats();
   }
 
   openHelpDialog(): void {
@@ -50,6 +45,7 @@ export class App {
       panelClass: 'popup',
       viewContainerRef: this.vcr,
       hasBackdrop: true,
+      ariaLabelledBy: 'help-dialog-title',
     });
   }
 

@@ -1,47 +1,80 @@
-<div class="header--wrapper">
-  <div class="navivations--wrapper navivations--start">
-    <svg-icon aria-hidden="true" svgName="shuffle" (click)="loadWordLocaly()" />
-    <svg-icon
-      aria-hidden="true"
-      svgName="calendar"
+<header class="header--wrapper">
+  <div class="navigations--wrapper navigations--start">
+    <button
+      type="button"
+      class="icon-button"
+      aria-label="Mot aléatoire"
+      (mousedown)="$event.preventDefault()"
+      (click)="loadWordLocaly()"
+    >
+      <svg-icon aria-hidden="true" svgName="shuffle" />
+    </button>
+    <button
+      type="button"
+      class="icon-button"
+      aria-label="Mots des jours précédents"
+      (mousedown)="$event.preventDefault()"
       (click)="loadWordWithDate()"
-    />
+    >
+      <svg-icon aria-hidden="true" svgName="calendar" />
+    </button>
   </div>
 
   <div class="title-wrapper">
     @if (canShowDate()) {
-    <div class="date-title-content">
-      <svg-icon
-        aria-hidden="true"
-        svgName="chevron_left"
-        (click)="decreaseDate()"
-      />
-      <div>{{ convertedDate() }}</div>
-      <svg-icon
-        aria-hidden="true"
-        svgName="chevron_right"
-        (click)="increaseDate()"
-      />
-    </div>
+      <h1 class="visually-hidden">Motilis</h1>
+      <div class="date-title-content">
+        <button
+          type="button"
+          class="icon-button"
+          aria-label="Jour précédent"
+          (mousedown)="$event.preventDefault()"
+          (click)="decreaseDate()"
+        >
+          <svg-icon aria-hidden="true" svgName="chevron_left" />
+        </button>
+        <p class="date" role="status">{{ convertedDate() }}</p>
+        <button
+          type="button"
+          class="icon-button"
+          aria-label="Jour suivant"
+          (mousedown)="$event.preventDefault()"
+          (click)="increaseDate()"
+        >
+          <svg-icon aria-hidden="true" svgName="chevron_right" />
+        </button>
+      </div>
     } @else {
-    <span>Motilis</span>
+      <h1 class="title">Motilis</h1>
     }
   </div>
 
-  <div class="navivations--wrapper navivations--end">
-    <svg-icon
-      aria-hidden="true"
-      svgName="bar_chart"
+  <div class="navigations--wrapper navigations--end">
+    <button
+      type="button"
+      class="icon-button"
+      aria-label="Statistiques"
+      (mousedown)="$event.preventDefault()"
       (click)="openStatDialog()"
-    />
-    <svg-icon aria-hidden="true" svgName="help" (click)="openHelpDialog()" />
+    >
+      <svg-icon aria-hidden="true" svgName="bar_chart" />
+    </button>
+    <button
+      type="button"
+      class="icon-button"
+      aria-label="Comment jouer"
+      (mousedown)="$event.preventDefault()"
+      (click)="openHelpDialog()"
+    >
+      <svg-icon aria-hidden="true" svgName="help" />
+    </button>
   </div>
-</div>
+</header>
 
-<div class="page-wrapper">
+<main class="page-wrapper" [attr.aria-busy]="status() === 'loading'">
   @if (status() === LOADED) {
-  <app-game />
+    <app-game />
   } @else if (status() === 'loading') {
-  <div>Chargement</div>
+    <p class="loading">Chargement…</p>
   }
-</div>
+</main>

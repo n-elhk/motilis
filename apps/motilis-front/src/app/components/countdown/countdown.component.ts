@@ -1,16 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { padStart } from '../../shared/services/api/api.service';
 
 @Component({
   selector: 'app-countdown',
   templateUrl: './countdown.component.html',
-  styleUrls: ['./countdown.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountdownComponent {
   readonly remainingTime = input.required<number>();

@@ -1,42 +1,13 @@
-import nx from '@nx/eslint-plugin';
+import js from '@eslint/js';
+import { defineConfig } from 'eslint/config';
+import tseslint from 'typescript-eslint';
+import prettier from 'eslint-config-prettier';
 
-export default [
-  ...nx.configs['flat/base'],
-  ...nx.configs['flat/typescript'],
-  ...nx.configs['flat/javascript'],
+export default defineConfig(
+  { ignores: ['**/dist', '**/out-tsc', '**/.angular'] },
   {
-    ignores: ['**/dist', '**/out-tsc'],
+    files: ['**/*.{ts,mts,cts,js,mjs,cjs}'],
+    extends: [js.configs.recommended, tseslint.configs.recommended],
   },
-  {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    rules: {
-      '@nx/enforce-module-boundaries': [
-        'error',
-        {
-          enforceBuildableLibDependency: true,
-          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
-          depConstraints: [
-            {
-              sourceTag: '*',
-              onlyDependOnLibsWithTags: ['*'],
-            },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    files: [
-      '**/*.ts',
-      '**/*.tsx',
-      '**/*.cts',
-      '**/*.mts',
-      '**/*.js',
-      '**/*.jsx',
-      '**/*.cjs',
-      '**/*.mjs',
-    ],
-    // Override or add rules here
-    rules: {},
-  },
-];
+  prettier,
+);

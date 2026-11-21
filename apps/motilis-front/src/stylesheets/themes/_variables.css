@@ -1,11 +1,26 @@
 /**  CSS Variables **/
 :root {
+  color-scheme: dark;
+
   --primary-color: oklch(0.1681 0.0019 286.19);
   --secondary-color: oklch(0.2228 0.0043 286.04);
+  --surface-sunken-color: oklch(0.1642 0.0021 286.17);
+  --surface-footer-color: oklch(0.1917 0.002 286.21);
 
   --text-color: oklch(1 0 0);
+  /* 5.3:1 on --secondary-color */
+  --muted-text-color: oklch(0.6474 0.0029 286.32);
 
   --correct-color: oklch(0.6494 0.1739 143.75);
   --absent-color: oklch(0.3473 0.004 286.19);
   --partial-color: oklch(0.7181 0.1379 75.8);
+
+  /* Text on correct/partial backgrounds: white only reaches 3:1 / 2.5:1, dark reaches 6.3:1 / 7.5:1 */
+  --on-state-color: var(--primary-color);
+  /* Readable variant of --absent-color for text on dark surfaces (≈5:1) */
+  --absent-text-color: oklch(0.65 0 0);
+
+  /* Empty tile border: 3.2:1 against --primary-color */
+  --empty-border-color: oklch(0.5 0 0);
+  --focus-color: oklch(0.7422 0.1341 257.15);
 }

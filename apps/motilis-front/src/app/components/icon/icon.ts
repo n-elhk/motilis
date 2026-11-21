@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -21,7 +20,6 @@ import { rxResource } from '@angular/core/rxjs-interop';
     class: 'svg-icon notranslate',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SvgIcon {
   private _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

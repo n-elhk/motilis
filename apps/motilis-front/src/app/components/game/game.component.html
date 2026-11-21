@@ -1,29 +1,44 @@
 <div id="game">
   @let solutionValue = solution();
-  <div class="board-wrapper" [style.--col-grid]="solutionValue.length">
+  <div
+    class="board-wrapper"
+    role="group"
+    aria-label="Grille"
+    [style.--col-grid]="solutionValue.length"
+  >
     @let lines = evaluations();
     @for (ev of lines; let rowIndex = $index; track rowIndex) {
-      <div class="attempt">
+      <div
+        class="attempt"
+        role="group"
+        [attr.aria-label]="'Essai ' + (rowIndex + 1)"
+      >
         @for (item of ev; let colIndex = $index; track colIndex) {
           @let letter = displayLetter(currentBoard(), rowIndex, colIndex);
           @let isCurrentRow = rowIndex === boardRowIndex();
+          @let isEvaluated = !!(letter && rowIndex < boardRowIndex());
 
           <div
             class="letter-wrapper"
-            [class]="`${lines[rowIndex][colIndex]}`"
+            [class]="item"
             [class.current-box]="
               boardColIndex() + 1 === colIndex && isCurrentRow
             "
-            [class.has-letter]="!!(letter && rowIndex < boardRowIndex())"
+            [class.has-letter]="isEvaluated"
           >
-            <div class="letter">{{ letter }}</div>
+            <div class="letter">
+              {{ letter }}
+              @if (isEvaluated && stateLabels[item]) {
+                <span class="visually-hidden">, {{ stateLabels[item] }}</span>
+              }
+            </div>
           </div>
         }
       </div>
     }
   </div>
 
-  <div class="keyboard-wrapper">
+  <div class="keyboard-wrapper" role="group" aria-label="Clavier">
     <div class="keyboard-line">
       <button wdKeyboard type="button" value="a" class="key">A</button>
       <button wdKeyboard type="button" value="z" class="key">Z</button>

@@ -1,36 +1,23 @@
 :host {
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    margin-block-end: 1rem;
-    padding: 10px 15px 10px 48px;
-    min-width: 300px;
-    max-width: 400px;
-    border: 1px solid var(--text-color);
-    color: var(--text-color);
-    background: var(--secondary-color);
-}
-
-/* ton style existant, au bon endroit (soit :host, soit .toast-host) */
-:host.toast-host {
   position: relative;
   display: flex;
   justify-content: space-around;
+  box-sizing: border-box;
+  inline-size: min(400px, calc(100vw - 2.5rem));
   margin-block-end: 1rem;
-  padding: 10px 15px 10px 48px;
-  min-width: 300px;
-  max-width: 400px;
+  padding: 0.625rem 1rem;
   border: 1px solid var(--text-color);
   color: var(--text-color);
   background: var(--secondary-color);
+  overflow-wrap: anywhere;
 }
 
-/* Le bloc toast lui-même (si besoin) */
 .toast {
   width: 100%;
 }
 
-/* classes appliquées par animate.enter/leave */
+/* Opacity-only fades: no spatial motion, so they stay under reduced motion.
+   ToastComponent closes on the leave animation's `animationend`, so it must keep running. */
 .toast-enter {
   animation: toastEnter var(--fadeIn, 150ms) ease forwards;
 }
@@ -39,7 +26,6 @@
   animation: toastLeave var(--fadeOut, 120ms) ease forwards;
 }
 
-/* IMPORTANT: l’animationName ici doit matcher ce que tu testes dans TS */
 @keyframes toastEnter {
   from { opacity: 0; }
   to   { opacity: 1; }

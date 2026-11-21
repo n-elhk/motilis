@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 import { MotilisStat } from '../../models/statistic';
 import { StorageKey, StorageValues } from '../../models/storage';
 import { getMotilisMock } from '../../mocks';
 import { GameStatusType } from '../../models';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class StorageService {
   public removeAndReload(key: StorageValues): void {
     localStorage.removeItem(key);
@@ -44,21 +42,5 @@ export class StorageService {
     const game = { date: Date.now(), won, nbAttempts };
     st.games.push(game);
     this.setStorage(StorageKey.Stat, st);
-  }
-
-  private isTodayAtLeastOneDayAhead(timestamp: number): boolean {
-    const date = new Date(timestamp),
-      today = new Date(),
-      oneDay = 24 * 60 * 60 * 1000; // Nombre de millisecondes dans une journée
-
-    /**
-     * Compare les dates avec l'écart d'une journée
-     * 3_000 car il y a un petit écart sinon 0
-     */
-    if (date.getTime() + oneDay - today.getTime() < 3_000) {
-      return true;
-    }
-
-    return false;
   }
 }

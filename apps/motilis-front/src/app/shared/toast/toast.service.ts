@@ -1,4 +1,5 @@
-import { Injectable, Injector, StaticProvider, inject } from '@angular/core';
+import { Service, Injector, StaticProvider, inject } from '@angular/core';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 
@@ -11,14 +12,13 @@ import {
 } from './toast-config';
 import { ToastRef } from './toast-ref';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class ToastService {
   private lastToast: ToastRef | undefined = undefined;
 
   private readonly injector = inject(Injector);
   private readonly overlay = inject(Overlay);
+  private readonly liveAnnouncer = inject(LiveAnnouncer);
   private readonly defaultOptions = inject(TOAST_CONFIG, { optional: true });
 
   show(config?: ToastConfig, isMultiple = false) {
@@ -41,6 +41,11 @@ export class ToastService {
     const toastPortal = new ComponentPortal(ToastComponent, null, injector);
 
     overlayRef.attach(toastPortal);
+
+    // The toast is purely visual and auto-dismisses: announce its text for screen reader users.
+    if (config.data?.text) {
+      this.liveAnnouncer.announce(config.data.text, 'polite');
+    }
 
     return toastRef;
   }

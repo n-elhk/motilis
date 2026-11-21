@@ -1,3 +1,23 @@
 button {
   touch-action: manipulation;
+  font: inherit;
+}
+
+:where(a:any-link, button):focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+/* Icon-only button: always pair with an aria-label. */
+.icon-button {
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: 2.5rem;
+  min-block-size: 2.5rem;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
 }

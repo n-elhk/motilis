@@ -4,20 +4,16 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug motilis-back with Nx",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["nx", "serve", "motilis-back"],
+      "name": "Debug motilis-back",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@motilis/back", "dev"],
       "env": {
         "NODE_OPTIONS": "--inspect=9229"
       },
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "skipFiles": ["<node_internals>/**"],
-      "sourceMaps": true,
-      "outFiles": [
-        "${workspaceFolder}/apps/motilis-back/dist/**/*.(m|c|)js",
-        "!**/node_modules/**"
-      ]
+      "sourceMaps": true
     }
   ]
 }

@@ -1,13 +1,19 @@
 {
   "extends": "../../tsconfig.base.json",
-  "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    }
-  ],
   "compilerOptions": {
-    "esModuleInterop": true
-  }
+    "noEmit": true,
+    "target": "es2025",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "lib": ["es2025", "esnext.temporal"],
+    "types": ["node"],
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noUnusedLocals": true,
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "allowImportingTsExtensions": true,
+    "importHelpers": false
+  },
+  "include": ["src/**/*.ts"]
 }

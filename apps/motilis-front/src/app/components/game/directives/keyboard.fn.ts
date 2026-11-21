@@ -1,14 +1,15 @@
 import {
+  ErrorHandler,
   Injector,
   assertInInjectionContext,
   inject,
   runInInjectionContext,
 } from '@angular/core';
-import { isInWordeList } from '../../../shared/dictionary/dictionary';
 import { LETTERS } from '../../../shared/mocks';
 import { KEY_TYPE } from '../../../shared/models';
 import { MotilisStore } from '../../../shared/store';
-import { ToastService } from '../../../shared/toast/toast.service';
+
+export { STATE_LABELS } from '../../../shared/store';
 
 export const enterLetter = (letter: string, injector?: Injector) => {
   if (!injector) {
@@ -41,13 +42,9 @@ export const enterLetter = (letter: string, injector?: Injector) => {
     }
 
     if (KEY_TYPE.ENTER === key && currentBoard.length === solution.length) {
-      if (!isInWordeList(currentBoard)) {
-        inject(ToastService).show({
-          data: { text: `Le mot n'est pas dans la liste`, type: 'warning' },
-        });
-        return;
-      }
-      store.validWord();
+      store.submitWord().catch((error: unknown) =>
+        assertedInjector.get(ErrorHandler).handleError(error),
+      );
     }
   });
 };
